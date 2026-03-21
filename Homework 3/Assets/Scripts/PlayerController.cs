@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform gun;
     
-    private Rigidbody2D currentPlatform;
     private Vector2 moveInput;
 
     private void Update() {
@@ -41,18 +40,14 @@ public class PlayerController : MonoBehaviour {
         }
     }
     void OnAttack(InputValue value) {
-        Instantiate(bullet, gun.position, transform.rotation);
-        CameraShake.instance.TriggerShake(0.1f, 0.1f);
+        if (value.isPressed) {
+            Instantiate(bullet, gun.position, transform.rotation);
+            CameraShake.instance.TriggerShake(0.1f, 0.1f);
+        }
     }
 
     private void Move() {
-        float platformVelocityX = 0f;
-
-        if (currentPlatform != null) {
-            platformVelocityX = currentPlatform.linearVelocity.x;
-        }
-
-        myRigidbody.linearVelocity = new Vector2((moveInput.x * moveSpeed) + platformVelocityX, myRigidbody.linearVelocity.y);
+        myRigidbody.linearVelocity = new Vector2((moveInput.x * moveSpeed), myRigidbody.linearVelocity.y);
     }
 
     private void FlipSprite() {

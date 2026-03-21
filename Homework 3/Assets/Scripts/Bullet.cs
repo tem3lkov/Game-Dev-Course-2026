@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour {
         myRigidbody = GetComponent<Rigidbody2D>();
         player = FindFirstObjectByType<PlayerController>();
         xSpeed = Mathf.Sign(player.transform.localScale.x) * bulletSpeed;
+        Destroy(gameObject, 1f);
     }
 
     void Update() {
@@ -23,7 +24,5 @@ public class Bullet : MonoBehaviour {
             Destroy(collision.gameObject);
             Instantiate(explosionParticles, transform.position, Quaternion.identity);
         }
-
-        Destroy(gameObject, 1f);
     }
 }

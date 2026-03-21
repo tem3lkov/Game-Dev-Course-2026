@@ -17,10 +17,9 @@ public class Respawn : MonoBehaviour {
     private IEnumerator HandleRespawn() {
         isRespawning = true;
 
-        playerHealth.TakeDamage(1);
-
-        transform.position = respawnPoint.transform.position;
         playerRigidbody.linearVelocity = Vector2.zero;
+        transform.position = respawnPoint.transform.position;
+        playerHealth.TakeDamage(1);
 
         yield return new WaitForSeconds(0.1f);
 
